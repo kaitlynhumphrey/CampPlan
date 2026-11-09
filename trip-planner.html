@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- 
+      Uncomment line below to test API functionality.
+      Generally, you should leave it commented so we don't make unnecessary queries.
+      -->
+    <!--<script src="js/parks-api.js"></script>-->
+    <link rel="stylesheet" href="css/trip-planner.css" />
+    <link rel="stylesheet" href="css/general.css" />
+  </head>
+  <body>
+    <h1>Plan Your Trip</h1>
+    <div id="tripPlannerGrid">
+      <aside id="searchMenu" class="container">
+        <h2>Search & Filter</h2>
+        <form>
+          <label>Start Date</label>
+          <input type="date" />
+        </form>
+      </aside>
+      <main id="parksGrid">
+        <!-- Hardcoded park cards so we don't make unnecessary queries on each refresh -->
+        <article class="park-card container">
+          <h2 class="park-name">
+            Anhluut'ukwsim Lax̱mihl Angwinga'asanakwhl Nisga'a [a.k.a. Nisga'a
+            Memorial Lava Bed Park]
+          </h2>
+          <img
+            src="https://nrs.objectstore.gov.bc.ca/kuwyyf/Anhluut_ukwsim_Laxmihl_Angwinga_asanskwhl_Nisga_a_Park_a_k_a_Nisga_a_Memorial_Lava_Bed_Park_386_gal_RS_33682_f5e9b1bf00.jpg"
+          />
+        </article>
+        <article class="park-card container">
+          <h2 class="park-name">
+            Anhluut'ukwsim Lax̱mihl Angwinga'asanakwhl Nisga'a [a.k.a. Nisga'a
+            Memorial Lava Bed Park]
+          </h2>
+          <img
+            src="https://nrs.objectstore.gov.bc.ca/kuwyyf/Anhluut_ukwsim_Laxmihl_Angwinga_asanskwhl_Nisga_a_Park_a_k_a_Nisga_a_Memorial_Lava_Bed_Park_386_gal_RS_33682_f5e9b1bf00.jpg"
+          />
+        </article>
+        <article class="park-card container">
+          <h2 class="park-name">
+            Anhluut'ukwsim Lax̱mihl Angwinga'asanakwhl Nisga'a [a.k.a. Nisga'a
+            Memorial Lava Bed Park]
+          </h2>
+          <img
+            src="https://nrs.objectstore.gov.bc.ca/kuwyyf/Anhluut_ukwsim_Laxmihl_Angwinga_asanskwhl_Nisga_a_Park_a_k_a_Nisga_a_Memorial_Lava_Bed_Park_386_gal_RS_33682_f5e9b1bf00.jpg"
+          />
+        </article>
+      </main>
+      <section id="tripOverview" class="container">
+        <h2>Trip Overview</h2>
+      </section>
+    </div>
+  </body>
+</html>

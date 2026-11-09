@@ -1,0 +1,50 @@
+/*------------------------------------------------------------
+  Styling for components of trip-planner.html
+
+  Author: Kaitlyn Humphrey
+----------------------------------------------------------*/
+
+@import url(variables.css);
+
+/* -- Main Layout -- */
+#tripPlannerGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+
+  gap: 1rem;
+}
+
+/* -- Park Results Section -- */
+#parksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+/* -- Park Cards -- */
+.park-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  box-sizing: border-box;
+
+  width: 100%;
+}
+
+.park-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+
+  border-radius: var(--border-radius-small);
+}
+
+.park-card .park-name {
+  font-size: 1.25rem;
+  display: inline-block;
+
+  /* Truncate long park names, full name included in tooltip */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

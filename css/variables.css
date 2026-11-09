@@ -1,0 +1,23 @@
+/*------------------------------------------------------------
+  Variables used throughout the website for consistent design.
+
+  To use these in a stylesheet, put this at the top of it: 
+    @import url(variables.css);
+  
+  Reference them using: var(--[variable-name])
+----------------------------------------------------------*/
+
+:root {
+  /* -- Colour Palette -- */
+  --primary-light1: rgb(254, 248, 236);
+
+  /* -- Borders -- */
+  --border-radius-large: 16px;
+  --border-radius-medium: 8px;
+  --border-radius-small: 4px;
+
+  --border-light: rgb(236, 236, 236);
+
+  /* -- Box Shadow -- */
+  --box-shadow-light: rgba(0, 0, 0, 0.025);
+}
