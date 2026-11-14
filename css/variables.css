@@ -11,6 +11,8 @@
   /* -- Colour Palette -- */
   --primary-light1: rgb(254, 248, 236);
 
+  --primary-dark2: rgb(80, 80, 80);
+
   /* -- Borders -- */
   --border-radius-large: 16px;
   --border-radius-medium: 8px;
@@ -20,4 +22,9 @@
 
   /* -- Box Shadow -- */
   --box-shadow-light: rgba(0, 0, 0, 0.025);
+
+  /* -- Gap Dimensions -- */
+  --gap-medium: 1rem;
+  --gap-small: 0.75rem;
+  --gap-xsmall: 0.5rem;
 }

@@ -7,9 +7,10 @@
 body {
   background-color: var(--primary-light1);
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, Arial, Helvetica, sans-serif;
 }
 
+/* -- Containers & Layouts -- */
 .container {
   height: fit-content;
   padding: 1rem;
@@ -19,4 +20,51 @@ body {
   box-shadow: 1px 1px 2px var(--box-shadow-light);
 
   background-color: white;
+}
+
+.grid-col-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-medium);
+}
+
+.grid-col-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-medium);
+}
+
+/* -- Buttons -- */
+
+button {
+  border: none;
+  border-radius: var(--border-radius-medium);
+
+  padding: 0.5rem 0.75rem;
+
+  background-color: black; /* Placeholder, replace with a primary-dark colour */
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.link-btn {
+  padding: 0.5rem 0;
+
+  background-color: transparent;
+  color: var(--primary-dark2);
+
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.collapsible-list:not(.expanded) > *:nth-child(n + 4) {
+  display: none;
+}
+
+hr {
+  width: 100%;
+  color: lightgray;
 }

@@ -9,9 +9,52 @@
 /* -- Main Layout -- */
 #tripPlannerGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: minmax(min(100%, 250px), 1fr) 2fr 1fr;
 
   gap: 1rem;
+}
+
+/* -- Search & Filter Section -- */
+
+.stacked-field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+
+label,
+legend {
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--primary-dark2);
+}
+
+.filter-heading {
+  margin: 0;
+}
+
+.filter {
+  border: none;
+  padding: 0;
+}
+
+.filter legend {
+  margin-bottom: var(--gap-xsmall);
+}
+
+.checkbox-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-xsmall);
+}
+
+.checkbox-item {
+  text-transform: none;
+}
+
+.checkbox-item input {
+  margin-right: 8px;
 }
 
 /* -- Park Results Section -- */
@@ -22,10 +65,11 @@
 }
 
 /* -- Park Cards -- */
-.park-card {
-  display: grid;
-  grid-template-columns: 1fr;
+.park-card.container {
+  height: fit-content;
   box-sizing: border-box;
+
+  padding: 0;
 
   width: 100%;
 }
@@ -36,15 +80,35 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
 
-  border-radius: var(--border-radius-small);
+  border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
 }
 
-.park-card .park-name {
+.park-info {
+  padding: 0 1rem;
+}
+
+.park-info > * {
+  padding: 0;
+  margin: var(--gap-xsmall) 0;
+}
+
+.park-info > .park-name {
   font-size: 1.25rem;
-  display: inline-block;
 
   /* Truncate long park names, full name included in tooltip */
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+}
+
+.park-attributes-list {
+  display: flex;
+  gap: var(--gap-small);
+  padding-left: 0;
+}
+
+.park-attributes-list li {
+  display: inline;
+
+  font-size: 0.75rem;
 }
