@@ -9,12 +9,16 @@
 /* -- Main Layout -- */
 #tripPlannerGrid {
   display: grid;
-  grid-template-columns: minmax(min(100%, 250px), 1fr) 2fr 1fr;
+  grid-template-columns: fit-content(250px) 1fr fit-content(200px);
 
   gap: 1rem;
 }
 
 /* -- Search & Filter Section -- */
+
+#searchMenu {
+  padding: 1rem;
+}
 
 .stacked-field {
   display: grid;
@@ -92,7 +96,7 @@ legend {
   margin: var(--gap-xsmall) 0;
 }
 
-.park-info > .park-name {
+.park-name {
   font-size: 1.25rem;
 
   /* Truncate long park names, full name included in tooltip */
@@ -111,4 +115,24 @@ legend {
   display: inline;
 
   font-size: 0.75rem;
+}
+
+/* -- Trip Overview -- */
+
+#tripOverview {
+  min-width: 300px;
+}
+
+.stop-container {
+  border: 2px solid var(--border-light);
+  border-radius: var(--border-radius-small);
+  padding: var(--gap-medium) var(--gap-xsmall);
+}
+
+.stop-number {
+  border-radius: var(--border-radius-small);
+  background-color: black;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  font-weight: bold;
 }
