@@ -39,7 +39,15 @@ nav{
     margin:auto;
     border: 1px solid black;
     padding: 10px 20px;
+    margin-bottom: 40px;
+
 }
+
+#container::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
 .question-number{
     color: white;
@@ -58,9 +66,10 @@ nav{
 
 .question{
     border: 1px solid black;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 20px;
     overflow: auto;
+    clear: both;
 
 }
 
@@ -76,7 +85,8 @@ nav{
 
 .form-set {
     float: left;
-    margin-right: 20px;
+    margin-right: 50px;
+
 }
 
 label {
@@ -86,7 +96,6 @@ label {
 
 .submit{
     text-align: center;
-    margin-top: 20px;
     margin-bottom: 100px;
 }
 
@@ -94,5 +103,61 @@ footer{
     text-align: center;
 }
 
+.campsite-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    max-height: 200px;
+    float: left;
+    margin-bottom:20px;
+}
 
+.itinerary-item {
+    float: left;
+    margin-left: 20px;
+}
 
+.activity-button{
+    float: right;
+
+}
+
+.activity-button2 {
+    display: block;
+    clear:both;
+    margin-top: 100px;
+}
+
+.activity-table {
+    clear: left;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+
+}
+
+.activity-caption {
+    text-align: left;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+th{
+    border-bottom: 1px solid black;
+}
+
+th, td{
+    padding: 5px;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-bottom: 100px;
+   
+}
