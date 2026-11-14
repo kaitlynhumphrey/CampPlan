@@ -79,14 +79,7 @@ function createParkCard(park) {
   const card = document.createElement('article');
   card.classList.add('park-card', 'container');
 
-  // Park Name
-  const title = document.createElement('h2');
-  title.textContent = park.name;
-  title.title = park.name; // Add full name to tooltip for truncated names.
-  title.classList.add('park-name');
-  card.appendChild(title);
-
-  // Photos
+  // Photo
   if (park.photos.length) {
     park.photos.forEach((url) => {
       const img = document.createElement('img');
@@ -97,6 +90,22 @@ function createParkCard(park) {
     });
   }
 
+  // Park Info container
+  const parkInfo = document.createElement('div');
+  parkInfo.classList.add('park-info');
+
+  // Park Name
+  const title = document.createElement('h2');
+  title.textContent = park.name;
+  title.title = park.name; // Add full name to tooltip for truncated names.
+  title.classList.add('park-name');
+  parkInfo.appendChild(title);
+
+  // Park facilities go here
+
+  // Park activities go here
+
+  card.appendChild(parkInfo);
   return card;
 }
 
