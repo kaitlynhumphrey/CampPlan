@@ -1,26 +1,39 @@
 class interface{
   constructor(){
-    this.baseUrl = "https://bcparks.api.gov.bc.ca/api";
     this.campSites = [];
   }
 
   async populateCampSites(){
     var page = 1;
-    const param = {
+    var pageCount = 0;
+    const param = new URLSearchParams ({
         "populate": "*",                            
         "filters[campingType][$notNull]": "true",
         "pagination[page]": page,
-        "pagination[pageSize]": 100,
-    }
-    do{
+        "pagination[pageSize]": 100, 
+    });
+    const url = `https://bcparks.api.gov.bc.ca/api/sites?${param.toString()}`;
 
-    }while
+    do{
+      //fetch yo fucking info
+      const results = await fetch(this.baseUrl);
+
+      //gives ya da size of the fucking result yeah and the fucking data portion of da program, yeah bruv
+      pageData = results["data"]
+
+      for(let i=0; i<=pageData.length; i++){
+        this.campSites.push(new Campzone(
+          
+        ))
+      }
+
+    }while (page <= pageCount);
   }
 
 
 }
 
-class campzone{
+class Campzone{
   constructor(parkName, parkPhotos, campingTypes, activityTypes, facilityTypes, hasFireBan, region){
     this.parkName = parkName;
     this.parkPhotos = parkPhotos;

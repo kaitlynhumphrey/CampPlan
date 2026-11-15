@@ -1,4 +1,7 @@
 from requests import get
+
+#hey everyone ik you see this python file, do not be alarmed I am just painfully slow and stupid
+
 param = {
     "pagination[page]": 1
 }
