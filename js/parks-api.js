@@ -30,83 +30,58 @@ class ApiInterace{
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({query, variables})
       }
-    )
-    var jason = await res.json()
-    console.log(jason)
+    );
+    var jason = await res.json();
+    console.log(jason.data);
   }
 }
 
 
 class Query{
   //helper class that simplifies passing params into the API call's query
-  constructor(campingTypes=null, activityTypes=null, facilityTypes=null, hasCampfireBan=null){
-    this.queryVariables= {
-  "filters": {
-    "parkPhotos": {
-      "imageUrl": {
-        "notNull": true
-      }
-    },
-    "parkCampingTypes": {
-      "campingType": {
-        "campingTypeName": {
-          "contains": campingTypes
+  constructor(campingTypes=[], activityTypes=[], facilityTypes=[], hasCampfireBan=null){
+    this.filters = {}
+    //if the params have length then add their contents as filters
+    if(campingTypes.length){
+        this.filters.parkCampingTypes =  {"campingType": {"campingTypeName": {"in": null}}}
         }
-      }
-    },
-    "parkActivities": {
-      "activityType": {
-        "activityName": {
-          "contains": activityTypes
+    if(activityTypes.length){
+        this.filters.parkActivities = {"activityType": {"activityName": {"in": activityTypes}}}
         }
-      }
-    },
-    "parkFacilities": {
-      "facilityType": {
-        "facilityName": {
-          "contains": facilityTypes
+    if(facilityTypes.length){
+        this.filters
         }
-      }
-    },
-    "protectedArea": {
-      "hasCampfireBan": {
-        "contains": hasCampfireBan
-      }
-    }
-  }
-  }
-  this.body = `query ($filters: SiteFiltersInput) {
-    sites(filters: $filters) {
-      documentId
-      siteName
-      parkPhotos {
-        imageUrl
-        photographer
-      }
-      parkCampingTypes {
-        campingType {
-          campingTypeName
+    //if it's not null then add hasCampfireBan ' 
+    if(hasCampfireBan != null){
+        this.filters.protectedArea = {"hasCampfireBan": {"eq": hasCampfireBan}}
         }
-      }
-      parkActivities {
-        activityType {
-          activityName
-        }
-      }
-      parkFacilities {
-        isFacilityOpen
-        name
-      }
-      protectedArea {
-        hasCampfireBanOverride
-        campfireBanEffectiveDate
-        campfireBanRescindedDate
-      }
-    }
-  }`
-  }
-}
 
+    this.variables = {"filters": this.filters}
+    this.query = 
+            `query Sites($filters: SiteFiltersInput) {
+        sites(filters: $filters) {
+            documentId
+            siteName
+            parkPhotos {
+            imageUrl
+            }
+            parkActivities {
+            activityType {
+                activityName
+            }
+            }
+            parkFacilities {
+            facilityType {
+                facilityName
+            }
+            }
+            protectedArea {
+            hasCampfireBan
+            }
+        }
+        }`
+    }
+}
 
 class CampSite{
   //this is a helper class to represent a campsite
@@ -126,4 +101,5 @@ class CampSite{
 
 var query = new Query()
 var inter = new ApiInterace()
-inter.fetchSites(query.body, query.queryVariables)
+inter.fetchSites(query.query, query.variables)
+
