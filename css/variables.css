@@ -11,6 +11,11 @@
   /* -- Colour Palette -- */
   --primary-light1: rgb(254, 248, 236);
 
+  --primary-green: #536b42;
+  --secondary-orange: #d48a54;
+  --secondary-sand: #e8c9a7;
+  --text-brown: #795548;
+
   --primary-dark2: rgb(80, 80, 80);
 
   /* -- Borders -- */

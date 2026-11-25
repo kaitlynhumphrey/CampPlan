@@ -1,84 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <title>Campsite Planner Home Page</title>
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
 
-    <head>
+  <body>
+    <header>
+      <h2 id="title">Camp Plan</h2>
 
-        <title>Campsite Planner Home Page</title>
-        <link rel="stylesheet" href="structure.css">
+      <nav>
+        <ul>
+          <li class="navbar"><a href="index.html">Home</a></li>
+          <li class="navbar"><a href="Campsite-About.html">About</a></li>
+          <li class="navbar">
+            <a href="CampsiteMatcher.html">Campsite Matcher</a>
+          </li>
+          <li class="navbar">
+            <a href="plan-activites.html">Activity Planner</a>
+          </li>
+          <li class="navbar"><a href="trip-planner.html">Trip Planner</a></li>
+          <li class="navbar"><a href="saved-plans.html">Saved Plans</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    </head>
-
-    <body>
-
-         <header>
-            <h2 id="title">Camp Plan</h2>
-
-            <nav>
-                <ul>
-                    <li class="navbar"><a href="index.html">Home</a></li>
-                    <li class="navbar"><a href="Campsite-About.html">About</a></li>
-                    <li class="navbar"><a href="CampsiteMatcher.html">Campsite Matcher</a></li>
-                    <li class="navbar"><a href="plan-activites.html">Activity Planner</a></li>
-                    <li class="navbar"><a href="trip-planner.html">Trip Planner</a></li>
-                    <li class="navbar"><a href="saved-plans">Saved Plans</a></li>
-                </ul>
-            </nav>
-
-        </header>
-
-       <div class="camp-header">
-        <h1>Camp Plan</h1>
-        <p>text</p>
-       </div> 
+    <div class="camp-header">
+      <h1>Camp Plan</h1>
+      <p>text</p>
+    </div>
 
     <div class="index-container">
-
-       <div class="items">
+      <div class="items">
         <h2>Welcome</h2>
         <p>Site Description</p>
-       </div>
+      </div>
 
-       <iframe src="#" title="camping video" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen >
-            
-       </iframe>
-    
-       </div>
+      <video autoplay muted loop playsinline>
+        <source src="videos/forest.mp4" type="video/mp4" />
+      </video>
+    </div>
 
-       <div class="index-contents">
+    <div class="index-contents">
+      <a href="Campsite-About.html">
+        <div class="contents">
+          <h3>About</h3>
+          <img class="index-image" src="#" alt="image" />
+          <p>Learn more about us</p>
+        </div>
+      </a>
 
-        <a href="Campsite-About.html">
-           <div class="contents"> 
-            <h3>About</h3>
-            <img class="index-image" scr="#" alt="image">
-            <p>Learn more about us</p>
-           </div>
-        </a>
+      <a href="CampsiteMatcher.html">
+        <div class="contents">
+          <h3>Campsite Matcher</h3>
+          <img class="index-image" src="#" alt="image" />
+          <p>Fill out a form and we will suggest campsites</p>
+        </div>
+      </a>
 
-        <a href="CampsiteMatcher.html">
-           <div class="contents"> 
-            <h3>Campsite Matcher</h3>
-            <img class="index-image" scr="#" alt="image">
-            <p>Fill out a form and we will suggest campsites</p>
-           </div> 
-        </a>
+      <a href="trip-planner.html">
+        <div class="contents">
+          <h3>Trip Planner</h3>
+          <img class="index-image" src="#" alt="image" />
+          <p>Create your dream camping trip</p>
+        </div>
+      </a>
+    </div>
 
-        <a href="trip-planner.html">
-          <div class="contents"> 
-            <h3>Trip Planner</h3>
-            <img class="index-image" src="#" alt="image">
-            <p>Create your dream camping trip</p>
-           </div> 
-        </a>
-
-
-       </div>
-
-     <footer>
-            <p>contact information</p>
-            <p>copyright</p>
-     </footer>
-        
-
-    </body>
-
+    <footer>
+      <p>contact information</p>
+      <p>copyright</p>
+    </footer>
+  </body>
 </html>

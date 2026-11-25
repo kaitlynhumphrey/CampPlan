@@ -1,0 +1,19 @@
+/*------------------------------------------------------------
+  Styling for components of Campsite-About.html
+----------------------------------------------------------*/
+
+.company-image {
+     width: 100%;
+    max-width: 500px;
+    height: auto;
+    max-height: 400px;
+    float:left;
+    margin-right: 20px;
+    padding:10px;
+
+}
+
+.about-item {
+    margin-bottom: 10px;
+    overflow: hidden;
+}

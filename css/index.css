@@ -1,0 +1,58 @@
+/*------------------------------------------------------------
+  Styling for components of index.html
+----------------------------------------------------------*/
+
+.camp-header,
+.index-contents {
+    width: 100%;
+    max-width:100vw;
+    text-align:center;
+    height:100%;
+    padding: 60px;
+    border: 1px solid black;
+    margin-top: 20px;
+    box-sizing:border-box;
+    
+}
+
+.index-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    padding:30px;
+    align-items:center;
+    
+}
+
+.index-container video {
+    width: 60%;
+    padding: 10px;
+    grid-column-start: 2;
+    height: auto;
+    border:none;
+    aspect-ratio: 16/9;
+    justify-self: end;
+}
+
+.items {
+    grid-column-start:1;
+    justify-self: center;
+}
+
+.contents {
+    border:1px solid black;
+    width:30%;
+    text-align: center;
+    display: inline-block;
+    margin:auto;
+    margin-right: 25px;
+    overflow: auto hidden;
+    color: black;
+
+
+}
+
+.index-image {
+    width: 100%;
+    max-width: 100px;
+    max-height:100px;
+}

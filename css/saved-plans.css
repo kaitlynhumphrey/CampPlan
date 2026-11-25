@@ -1,0 +1,89 @@
+
+/* Saved Plans Page */
+
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#savedPlans {
+    background-color: white;
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-medium);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#savedPlans p {
+    color: var(--text-brown);
+    text-align: center;
+}
+
+
+/* Saved Trip Card */
+
+.saved-trip {
+    background-color: white;
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-medium);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.saved-trip h3 {
+    color: var(--primary-green);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.saved-trip h4 {
+    color: var(--primary-green);
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* Edit Plan Button */
+
+.saved-trip button {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-small);
+    padding: 10px 20px;
+}
+
+.saved-trip button:hover {
+    background-color: var(--secondary-orange);
+}
+
+/* Activities Table */
+
+.saved-trip table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.saved-trip th,
+.saved-trip td {
+    border: 1px solid var(--border-light);
+    padding: 10px;
+    text-align: left;
+}
+
+.saved-trip th {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+
+.campground-image {
+    background-color: var(--secondary-sand);
+    border: 1px solid #dddddd;
+    border-radius: var(--border-radius-medium);
+    padding: 40px;
+    text-align: center;
+    margin: 15px 0;
+}
+
