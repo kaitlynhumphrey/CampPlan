@@ -1,16 +1,36 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <title>Trip Planner - Camp Plan</title>
     <!-- 
       Uncomment line below to test API functionality.
       Generally, you should leave it commented so we don't make unnecessary queries.
       -->
     <!--<script src="js/parks-api.js"></script>-->
-    <link rel="stylesheet" href="css/trip-planner.css" />
     <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/trip-planner.css" />
   </head>
   <body>
-    <h1>Plan Your Trip</h1>
+    <header>
+      <h2 id="title">Camp Plan</h2>
+      <nav>
+        <ul>
+          <li class="navbar"><a href="index.html">Home</a></li>
+          <li class="navbar"><a href="Campsite-About.html">About</a></li>
+          <li class="navbar">
+            <a href="CampsiteMatcher.html">Campsite Matcher</a>
+          </li>
+          <li class="navbar">
+            <a href="plan-activites.html">Activity Planner</a>
+          </li>
+          <li class="navbar"><a href="trip-planner.html">Trip Planner</a></li>
+          <li class="navbar"><a href="saved-plans.html">Saved Plans</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Plan Your Trip</h1>
     <div id="tripPlannerGrid">
       <aside id="searchMenu" class="container">
         <h2>Search & Filter</h2>
@@ -28,6 +48,7 @@
           </h2>
           <img
             src="https://nrs.objectstore.gov.bc.ca/kuwyyf/Anhluut_ukwsim_Laxmihl_Angwinga_asanskwhl_Nisga_a_Park_a_k_a_Nisga_a_Memorial_Lava_Bed_Park_386_gal_RS_33682_f5e9b1bf00.jpg"
+            alt="Nisga'a Memorial Lava Bed Park"
           />
         </article>
         <article class="park-card container">
@@ -37,6 +58,7 @@
           </h2>
           <img
             src="https://nrs.objectstore.gov.bc.ca/kuwyyf/Anhluut_ukwsim_Laxmihl_Angwinga_asanskwhl_Nisga_a_Park_a_k_a_Nisga_a_Memorial_Lava_Bed_Park_386_gal_RS_33682_f5e9b1bf00.jpg"
+            alt="Nisga'a Memorial Lava Bed Park"
           />
         </article>
         <article class="park-card container">
@@ -46,6 +68,7 @@
           </h2>
           <img
             src="https://nrs.objectstore.gov.bc.ca/kuwyyf/Anhluut_ukwsim_Laxmihl_Angwinga_asanskwhl_Nisga_a_Park_a_k_a_Nisga_a_Memorial_Lava_Bed_Park_386_gal_RS_33682_f5e9b1bf00.jpg"
+            alt="Nisga'a Memorial Lava Bed Park"
           />
         </article>
       </main>

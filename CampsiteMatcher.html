@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <title>Campsite Matcher</title>
-    <link rel="stylesheet" href="css/structure.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/campsite-matcher.css" />
   </head>
 
   <body>
@@ -20,19 +21,19 @@
             <a href="plan-activites.html">Activity Planner</a>
           </li>
           <li class="navbar"><a href="trip-planner.html">Trip Planner</a></li>
-          <li class="navbar"><a href="saved-plans">Saved Plans</a></li>
+          <li class="navbar"><a href="saved-plans.html">Saved Plans</a></li>
         </ul>
       </nav>
     </header>
 
-    <h1 id="trip-plan">Plan Your Trip</h1>
+    <h1 class="page-title">Plan Your Trip</h1>
 
-    <div id="container">
-      <form action="#" method="post">
+    <div class="container page-content">
+      <form id="campsite-form" action="#" method="post">
         <section>
           <div>
             <p class="question-number">1</p>
-            <p id="q1">Question</p>
+            <p class="question-label">Question</p>
             <h2 class="field-title">Question Title</h2>
             <p>Details</p>
           </div>
@@ -55,7 +56,7 @@
         <section>
           <div class="field-title">
             <p class="question-number">2</p>
-            <p id="q1">Question</p>
+            <p class="question-label">Question</p>
             <h2 class="field-title">Question Title</h2>
             <p>Details</p>
           </div>
@@ -78,7 +79,7 @@
     </div>
 
     <div class="submit">
-      <input type="submit" value="Submit" />
+      <input type="submit" form="campsite-form" value="Submit" />
     </div>
 
     <footer>
