@@ -35,17 +35,46 @@ class ApiInterace{
     );
     
     const jason = await res.json();
-    var siteList = []
+    console.log(jason.data.sites[7])
+    var siteList = [];
 
     //populate siteList with campsites and return siteList
-    jason.sites.array.forEach(element => {
-        siteList.push(
-            new CampSite(
-                parkName = element.siteName,
-                parkPhotos = 
-            )
+    jason.data.sites.forEach(object=>{
+      siteList.push(
+        new CampSite(
+
         )
-    });
+      );
+      console.log(object)
+    })
+  }
+  parseFacilities(facilities=[]){
+    var facilityList = [];
+
+    facilities.forEach(facility=>{
+      facilityList.push(facility.facilityType.facilityName);
+    })
+    return(facilityList)
+  }
+
+  parsePhotos(photos=[]){
+    //another disgusting methods
+    //parses response object for image url's
+    var photoList = []
+    photos.forEach(photo=>{
+      photoList.push(photo.imageUrl);
+    })
+    return(photoList);
+  }
+
+  parseActivties(activities=[]){
+    //probably the ugliest method you've ever seen
+    //parse response objects for thier activity types
+    var activityList = []
+    activities.forEach(activityType => {
+      activityList.push(activityType.activityType.activityName);
+    })
+    return(activityList);
   }
 }
 
@@ -112,6 +141,8 @@ class CampSite{
     Object.freeze(this);
   }
 }
+
+
 
 var query = new Query()
 var inter = new ApiInterace()
