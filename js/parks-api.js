@@ -42,25 +42,31 @@ class ApiInterace{
     jason.data.sites.forEach(object=>{
       siteList.push(
         new CampSite(
-
+          documentId=object.documentId,
+          parkName=object.siteName,
+          parkPhotos=this.parsePhotos(object.parkPhotos),
+          campingTypes=this.fetchSites,
+          activityTypes=this.parseActivties(object.parkActivities),
+          facilityTypes=this.parseFacilities(object.parkFacilities),
+          hasCampfireBan=object.protectedArea.hasCampfireBan
         )
       );
       console.log(object)
     })
   }
   parseFacilities(facilities=[]){
+    //hey whats this?! another putride method.. who would've guessed...
     var facilityList = [];
-
     facilities.forEach(facility=>{
       facilityList.push(facility.facilityType.facilityName);
     })
-    return(facilityList)
+    return(facilityList);
   }
 
   parsePhotos(photos=[]){
     //another disgusting methods
     //parses response object for image url's
-    var photoList = []
+    var photoList = [];
     photos.forEach(photo=>{
       photoList.push(photo.imageUrl);
     })
@@ -70,7 +76,7 @@ class ApiInterace{
   parseActivties(activities=[]){
     //probably the ugliest method you've ever seen
     //parse response objects for thier activity types
-    var activityList = []
+    var activityList = [];
     activities.forEach(activityType => {
       activityList.push(activityType.activityType.activityName);
     })
