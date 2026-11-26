@@ -23,6 +23,8 @@ class ApiInterace{
     return(0);
   }
   async fetchSites(query, variables){
+    //fetches a list of items from the API given query and variables, returns a collection of campsite objects
+    //this is built to be used with the query helper class kinda like, fetchSites(Query.query, Query.variables)
     const url = `https://bcparks.api.gov.bc.ca/graphql`;
     const res = await fetch(url, 
       {
@@ -31,29 +33,41 @@ class ApiInterace{
         body: JSON.stringify({query, variables})
       }
     );
-    var jason = await res.json();
-    console.log(jason.data);
+    
+    const jason = await res.json();
+    var siteList = []
+
+    //populate siteList with campsites and return siteList
+    jason.sites.array.forEach(element => {
+        siteList.push(
+            new CampSite(
+                parkName = element.siteName,
+                parkPhotos = 
+            )
+        )
+    });
   }
 }
 
 
 class Query{
   //helper class that simplifies passing params into the API call's query
+  //please excuse the disgusting queries, flip this crud 
   constructor(campingTypes=[], activityTypes=[], facilityTypes=[], hasCampfireBan=null){
     this.filters = {}
     //if the params have length then add their contents as filters
     if(campingTypes.length){
-        this.filters.parkCampingTypes =  {"campingType": {"campingTypeName": {"in": null}}}
+        this.filters.parkCampingTypes =  {"campingType": {"campingTypeName": {"in": null}}};
         }
     if(activityTypes.length){
-        this.filters.parkActivities = {"activityType": {"activityName": {"in": activityTypes}}}
+        this.filters.parkActivities = {"activityType": {"activityName": {"in": activityTypes}}};
         }
     if(facilityTypes.length){
-        this.filters
+        this.filters.parkFacilities = {"facilityType": {"facilityName": {"in": null}}};
         }
-    //if it's not null then add hasCampfireBan ' 
+    //if it's not null then add hasCampfireBan
     if(hasCampfireBan != null){
-        this.filters.protectedArea = {"hasCampfireBan": {"eq": hasCampfireBan}}
+        this.filters.protectedArea = {"hasCampfireBan": {"eq": hasCampfireBan}};
         }
 
     this.variables = {"filters": this.filters}
