@@ -1,132 +1,171 @@
-'use strict';
-// Hard coded query variables for park cards
-// TODO: write a method to construct this.
-const variables = {
-  pagination: {
-    limit: 1,
-  },
-  filters: {
-    parkOperation: {
-      hasDates: {
-        notNull: true,
-      },
-    },
-    parkCampingTypes: {
-      campingType: {
-        campingTypeCode: {
-          notNull: true,
-        },
-      },
-    },
-    parkPhotos: {
-      imageUrl: {
-        notNull: true,
-      },
-    },
-  },
-};
+// Data returned (one object per park)
+// documentId
+// parkName
+// parkPhotos { imageUrl }: maximum one photo, URL or 'null'
+// campingTypes: list of names
+// activityTypes: list of names
+// facilityTypes: list of names
+// hasCampfireBan: boolean
+// region: region name? If it exists
 
-//--------------------------------------
-//  BC Parks API helper class.
-//
-//  Author: Kaitlyn Humphrey
-//--------------------------------------
-class ParksAPI {
-  //--------------------------------------
-  //  Retrieves data for park cards on Trip Planner page.
-  //--------------------------------------
-  static async fetchParkCardData(variables) {
-    const query = `
-      query GetParks($pagination: PaginationArg, 
-        $filters: ProtectedAreaFiltersInput) {
-        protectedAreas(filters: $filters) {
-          parkPhotos(pagination: $pagination) {
-            imageUrl
-          }
-          parkNames(pagination: $pagination) {
-            parkName
-          }
-        }
-      }
-    `;
+// Filters
+// campingTypes: string[ ]  *MUST NOT BE NULL
+// activityTypes: string[ ]
+// facilityTypes: string[ ]
+// hasCampfireBan: bool
+// Different filters combine with AND, values within one list combine with OR
+// ^ ur requesting protected areas
+// lmk if you have any questions
 
-    const response = await fetch('https://bcparks.api.gov.bc.ca/graphql', {
+class ApiInterace {
+  constructor() {
+    return 0;
+  }
+  async fetchSites(query, variables) {
+    //fetches a list of items from the API given query and variables, returns a collection of campsite objects
+    //this is built to be used with the query helper class kinda like, fetchSites(Query.query, Query.variables)
+    const url = `https://bcparks.api.gov.bc.ca/graphql`;
+    const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, variables }),
     });
 
-    const { data, errors } = await response.json();
-    if (errors) throw new Error(errors[0].message);
-    return data;
-  }
-}
+    const jason = await res.json();
+    var siteList = [];
 
-//--------------------------------------
-//  Returns flattened park card data from GraphQL query.
-//--------------------------------------
-function normalizeParkCardData(data) {
-  return data.protectedAreas.map((area) => ({
-    name: area.parkNames?.[0]?.parkName,
-    photos: area.parkPhotos.map((p) => p.imageUrl),
-  }));
-}
-
-//--------------------------------------
-//  Returns new .park-card article element.
-//--------------------------------------
-function createParkCard(park) {
-  const card = document.createElement('article');
-  card.classList.add('park-card', 'container');
-
-  // Photo
-  if (park.photos.length) {
-    park.photos.forEach((url) => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = park.name;
-      img.loading = 'lazy';
-      card.appendChild(img);
+    //populate siteList with campsites and return siteList
+    jason.data.sites.forEach((object) => {
+      siteList.push(
+        new CampSite(
+          object.documentId,
+          object.siteName,
+          this.parsePhotos(object.parkPhotos),
+          [],
+          this.parseActivties(object.parkActivities),
+          this.parseFacilities(object.parkFacilities),
+          object.protectedArea.hasCampfireBan,
+        ),
+      );
     });
+
+    return siteList;
   }
-
-  // Park Info container
-  const parkInfo = document.createElement('div');
-  parkInfo.classList.add('park-info');
-
-  // Park Name
-  const title = document.createElement('h2');
-  title.textContent = park.name;
-  title.title = park.name; // Add full name to tooltip for truncated names.
-  title.classList.add('park-name');
-  parkInfo.appendChild(title);
-
-  // Park facilities go here
-
-  // Park activities go here
-
-  card.appendChild(parkInfo);
-  return card;
-}
-
-//--------------------------------------
-//  Testing entry point.
-//--------------------------------------
-async function init() {
-  try {
-    const data = await ParksAPI.fetchParkCardData(variables);
-    const parks = normalizeParkCardData(data);
-    console.log(parks);
-
-    const parksGrid = document.getElementById('parksGrid');
-
-    parks.forEach((card) => {
-      const cardElement = createParkCard(card);
-      parksGrid.appendChild(cardElement);
+  parseFacilities(facilities = []) {
+    //hey whats this?! another putride method.. who would've guessed...
+    var facilityList = [];
+    facilities.forEach((facility) => {
+      facilityList.push(facility.facilityType.facilityName);
     });
-  } catch (err) {
-    console.error("Couldn't load parks:", err);
+    return facilityList;
+  }
+
+  parsePhotos(photos = []) {
+    //another disgusting methods
+    //parses response object for image url's
+    var photoList = [];
+    photos.forEach((photo) => {
+      photoList.push(photo.imageUrl);
+    });
+    return photoList;
+  }
+
+  parseActivties(activities = []) {
+    //probably the ugliest method you've ever seen
+    //parse response objects for thier activity types
+    var activityList = [];
+    activities.forEach((activityType) => {
+      activityList.push(activityType.activityType.activityName);
+    });
+    return activityList;
   }
 }
 
-init();
+class Query {
+  //helper class that simplifies passing params into the API call's query
+  //please excuse the disgusting queries, flip this crud
+  constructor(
+    campingTypes = [],
+    activityTypes = [],
+    facilityTypes = [],
+    hasCampfireBan = null,
+  ) {
+    this.filters = {};
+    //if the params have length then add their contents as filters
+    if (campingTypes.length) {
+      this.filters.parkCampingTypes = {
+        'campingType': { 'campingTypeName': { 'in': null } },
+      };
+    }
+    if (activityTypes.length) {
+      this.filters.parkActivities = {
+        'activityType': { 'activityName': { 'in': activityTypes } },
+      };
+    }
+    if (facilityTypes.length) {
+      this.filters.parkFacilities = {
+        'facilityType': { 'facilityName': { 'in': null } },
+      };
+    }
+    //if it's not null then add hasCampfireBan
+    if (hasCampfireBan != null) {
+      this.filters.protectedArea = {
+        'hasCampfireBan': { 'eq': hasCampfireBan },
+      };
+    }
+
+    this.variables = { 'filters': this.filters };
+    this.query = `query Sites($filters: SiteFiltersInput) {
+        sites(filters: $filters) {
+            documentId
+            siteName
+            parkPhotos {
+            imageUrl
+            }
+            parkActivities {
+            activityType {
+                activityName
+            }
+            }
+            parkFacilities {
+            facilityType {
+                facilityName
+            }
+            }
+            protectedArea {
+            hasCampfireBan
+            }
+        }
+        }`;
+  }
+}
+
+class CampSite {
+  //this is a helper class to represent a campsite
+  constructor(
+    documentId,
+    parkName,
+    parkPhotos,
+    campingTypes,
+    activityTypes,
+    facilityTypes,
+    hasCampfireBan,
+    region,
+  ) {
+    this.documentId = documentId;
+    this.parkName = parkName;
+    this.parkPhotos = parkPhotos;
+    this.campingTypes = campingTypes;
+    this.activityTypes = activityTypes;
+    this.facilityTypes = facilityTypes;
+    this.hasCampfireBan = hasCampfireBan;
+    this.region = region;
+    Object.freeze(this);
+  }
+}
+
+var query = new Query();
+var inter = new ApiInterace();
+var testList = await inter.fetchSites(query.query, query.variables);
+
+console.log(testList);
