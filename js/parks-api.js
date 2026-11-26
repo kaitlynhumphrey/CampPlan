@@ -35,24 +35,24 @@ class ApiInterace{
     );
     
     const jason = await res.json();
-    console.log(jason.data.sites[7])
     var siteList = [];
 
     //populate siteList with campsites and return siteList
     jason.data.sites.forEach(object=>{
       siteList.push(
         new CampSite(
-          documentId=object.documentId,
-          parkName=object.siteName,
-          parkPhotos=this.parsePhotos(object.parkPhotos),
-          campingTypes=this.fetchSites,
-          activityTypes=this.parseActivties(object.parkActivities),
-          facilityTypes=this.parseFacilities(object.parkFacilities),
-          hasCampfireBan=object.protectedArea.hasCampfireBan
+          object.documentId,
+          object.siteName,
+          this.parsePhotos(object.parkPhotos),
+          [],
+          this.parseActivties(object.parkActivities),
+          this.parseFacilities(object.parkFacilities),
+          object.protectedArea.hasCampfireBan
         )
       );
-      console.log(object)
     })
+
+    return(siteList);
   }
   parseFacilities(facilities=[]){
     //hey whats this?! another putride method.. who would've guessed...
@@ -152,5 +152,7 @@ class CampSite{
 
 var query = new Query()
 var inter = new ApiInterace()
-inter.fetchSites(query.query, query.variables)
+var testList = await inter.fetchSites(query.query, query.variables)
+
+console.log(testList)
 
