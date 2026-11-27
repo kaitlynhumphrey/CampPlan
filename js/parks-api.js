@@ -98,8 +98,7 @@ class ApiInterace{
 
 class Query{
   //helper class that simplifies passing params into the API call's query
-  //please excuse the disgusting queries, flip this crud 
-  constructor(campingTypes=[], activityTypes=[], facilityTypes=[], hasCampfireBan=null){
+  constructor(campingTypes=[], activityTypes=[], facilityTypes=[], hasCampfireBan=null, pageSize=10){
     this.filters = {}
     //if the params have length then add their contents as filters
     if(campingTypes.length){
@@ -117,9 +116,10 @@ class Query{
         }
 
     this.variables = {"filters": this.filters}
+    //this the base query 
     this.query = 
             `query Sites($filters: SiteFiltersInput) {
-        sites(filters: $filters) {
+        sites(filters: $filters, pagination: { page: 1, pageSize: ${pageSize} }) {
             documentId
             siteName
             parkPhotos {
@@ -166,7 +166,13 @@ class CampSite{
 
 
 
-var query = new Query()
+var query = new Query(
+  [],
+  ['Cycling'],
+  [],
+  false,
+  2
+)
 var inter = new ApiInterace()
 var testList = await inter.fetchSites(query.query, query.variables)
 
