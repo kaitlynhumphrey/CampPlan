@@ -37,14 +37,14 @@ class ApiInterace{
     const jason = await res.json();
     var siteList = [];
 
-    //populate siteList with campsites and return siteList
+    // populate siteList with campsites and return siteList
     jason.data.sites.forEach(object=>{
       siteList.push(
         new CampSite(
           object.documentId,
           object.siteName,
           this.parsePhotos(object.parkPhotos),
-          [],
+          this.parseCampingTypes(object.parkCampingTypes),
           this.parseActivties(object.parkActivities),
           this.parseFacilities(object.parkFacilities),
           object.protectedArea.hasCampfireBan
@@ -82,6 +82,17 @@ class ApiInterace{
     })
     return(activityList);
   }
+
+  parseCampingTypes(campingTypes=[]){
+    //WOOPDY DOO, another. ugg. method.
+    //parse response object for camping types
+    var campingTypesList = [];
+    campingTypes.forEach(object => {
+      campingTypesList.push(object.campingType.campingTypeName)
+    });
+    return(campingTypesList);
+  }
+
 }
 
 
@@ -127,8 +138,13 @@ class Query{
             protectedArea {
             hasCampfireBan
             }
+            parkCampingTypes {
+              campingType {
+                campingTypeName
+                }
+            }
         }
-        }`
+      }`
     }
 }
 
